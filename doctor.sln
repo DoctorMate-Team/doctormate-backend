@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "doctor.APIs", "doctor.APIs\doctor.APIs.csproj", "{A2F53726-06D6-46E1-AE2F-74F68531993D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "doctor.APIs", "doctor.APIs\doctor.APIs.csproj", "{A2F53726-06D6-46E1-AE2F-74F68531993D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "doctor.Core", "doctor.Core\doctor.Core.csproj", "{D99B33C0-7D11-49B3-A0B9-96A369FE17B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "doctor.Core", "doctor.Core\doctor.Core.csproj", "{D99B33C0-7D11-49B3-A0B9-96A369FE17B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "doctor.Repository", "doctor.Repository\doctor.Repository.csproj", "{E5CD5A3F-EB7A-440B-8D67-138DC252A86A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "doctor.Repository", "doctor.Repository\doctor.Repository.csproj", "{E5CD5A3F-EB7A-440B-8D67-138DC252A86A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "doctor.Service", "doctor.Service\doctor.Service.csproj", "{131C5D55-D86A-41A8-A282-28299A22A5DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "doctor.Service", "doctor.Service\doctor.Service.csproj", "{131C5D55-D86A-41A8-A282-28299A22A5DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
