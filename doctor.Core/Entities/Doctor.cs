@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace doctor.Core.Entities
 {
-    public class Doctor
+    public class Doctor : BaseEntity<Guid>
     {
-        public Guid Id { get; set; }
+        #region Properties
         public Guid UserId { get; set; }
         public string? Specialty { get; set; }
         public string? Qualifications { get; set; }
@@ -17,9 +17,14 @@ namespace doctor.Core.Entities
         public string? OpenmrsProviderUuid { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
-
-        // Navigation
+        #endregion
+        #region Relation With User
         public User User { get; set; } = null!;
+        #endregion
+        #region Relation With Appointment
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        #endregion
+
+
     }
 }

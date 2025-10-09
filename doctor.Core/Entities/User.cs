@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace doctor.Core.Entities
 {
-    public class User
+    public class User : BaseEntity<Guid>
     {
-        public Guid Id { get; set; }
+        #region Properties
         public string Email { get; set; } = null!;
         public string PasswordHash { get; set; } = null!;
         public string? FullName { get; set; }
@@ -18,10 +18,16 @@ namespace doctor.Core.Entities
         public bool IsActive { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
-
-        // Navigation
+        #endregion
+        #region Relation With Patient
         public Patient? Patient { get; set; }
+        #endregion
+        #region Relation With Doctor
         public Doctor? Doctor { get; set; }
+        #endregion
+        #region Relation With Notification
         public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+        #endregion
+
     }
 }

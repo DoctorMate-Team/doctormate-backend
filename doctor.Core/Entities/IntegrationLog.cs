@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace doctor.Core.Entities
 {
-    public class IntegrationLog
+    public class IntegrationLog : BaseEntity<Guid>
     {
-        public Guid Id { get; set; }
+        #region Properties
         public string Endpoint { get; set; } = null!;
         public string Method { get; set; } = null!;
         public string? EntityType { get; set; }
@@ -18,5 +18,7 @@ namespace doctor.Core.Entities
         public int StatusCode { get; set; }
         public bool Success { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        #endregion
+
     }
 }

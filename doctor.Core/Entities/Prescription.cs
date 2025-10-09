@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace doctor.Core.Entities
 {
-    public class Prescription
+    public class Prescription : BaseEntity<Guid>
     {
-        public Guid Id { get; set; }
+        #region Properties
         public Guid DiagnosisId { get; set; }
         public Guid PatientId { get; set; }
         public Guid DoctorId { get; set; }
@@ -18,5 +18,7 @@ namespace doctor.Core.Entities
         public int? DurationDays { get; set; }
         public string? OpenmrsOrderUuid { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        #endregion
+
     }
 }

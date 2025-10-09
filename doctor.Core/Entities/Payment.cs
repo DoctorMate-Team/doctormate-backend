@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace doctor.Core.Entities
 {
-    public class Payment
+    public class Payment : BaseEntity<Guid>
     {
-        public Guid Id { get; set; }
+        #region Properties
         public Guid AppointmentId { get; set; }
         public Guid PatientId { get; set; }
         public decimal Amount { get; set; }
@@ -19,5 +19,7 @@ namespace doctor.Core.Entities
         public DateTime? PaidAt { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
+        #endregion
+
     }
 }

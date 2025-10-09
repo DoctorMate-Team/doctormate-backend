@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace doctor.Core.Entities
 {
-    public class MedicalRecord
+    public class MedicalRecord : BaseEntity<Guid>
     {
-        public Guid Id { get; set; }
+        #region Properties
         public Guid PatientId { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
@@ -19,8 +19,10 @@ namespace doctor.Core.Entities
         public string? OpenmrsEncounterUuid { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
-
-        // Navigation
+        #endregion
+        #region Relation With Patient
         public Patient Patient { get; set; } = null!;
+        #endregion
+
     }
 }
