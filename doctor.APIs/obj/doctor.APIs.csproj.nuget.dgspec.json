@@ -34,6 +34,12 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "D:\\Doctor Mate\\doctor\\doctor.Core\\doctor.Core.csproj": {
+                "projectPath": "D:\\Doctor Mate\\doctor\\doctor.Core\\doctor.Core.csproj"
+              },
+              "D:\\Doctor Mate\\doctor\\doctor.Repository\\doctor.Repository.csproj": {
+                "projectPath": "D:\\Doctor Mate\\doctor\\doctor.Repository\\doctor.Repository.csproj"
+              },
               "D:\\Doctor Mate\\doctor\\doctor.Service\\doctor.Service.csproj": {
                 "projectPath": "D:\\Doctor Mate\\doctor\\doctor.Service\\doctor.Service.csproj"
               }
@@ -55,6 +61,20 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[8.0.20, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.20, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.20, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
@@ -199,6 +219,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.20, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
