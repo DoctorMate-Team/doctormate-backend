@@ -1,0 +1,22 @@
+[
+    {
+        "Id": "90aaee42-2275-48ee-b3d5-810b8ddca68b",
+        "UserId": "008bc321-fccb-47f6-9a24-60a762737a34",
+        "BirthDate": "1995-05-20",
+        "Gender": "Male",
+        "Address": "Cairo, Egypt",
+        "BloodType": "A+",
+        "EmergencyContact": "{\"Name\":\"Ali\",\"Phone\":\"01000000000\"}",
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    },
+    {
+        "Id": "e4b908e6-9cbe-47c1-9999-10a554848d43",
+        "UserId": "2523c115-3588-440e-9032-8571b93f672c",
+        "BirthDate": "2000-03-15",
+        "Gender": "Female",
+        "Address": "Alexandria, Egypt",
+        "BloodType": "O+",
+        "EmergencyContact": "{\"Name\":\"Sara\",\"Phone\":\"01111111111\"}",
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]

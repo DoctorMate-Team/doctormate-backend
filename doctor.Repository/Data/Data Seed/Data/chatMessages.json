@@ -1,0 +1,10 @@
+[
+    {
+        "Id": "bb022954-02c4-4370-8010-6654c6885ffc",
+        "SenderId": "008bc321-fccb-47f6-9a24-60a762737a34",
+        "ReceiverId": "5fcf8c92-bc1b-4048-8128-73af384759bf",
+        "AppointmentId": "a7c1fe68-e40a-4acb-8b0a-4208bd0a2ae4",
+        "Message": "Hello doctor, I have a question about my prescription.",
+        "SentAt": "2025-10-11T20:22:10.524620"
+    }
+]

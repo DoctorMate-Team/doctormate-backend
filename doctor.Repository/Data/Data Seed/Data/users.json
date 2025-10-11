@@ -1,0 +1,42 @@
+[
+    {
+        "Id": "5fcf8c92-bc1b-4048-8128-73af384759bf",
+        "FullName": "Dr. Ahmed Ali",
+        "Phone": "012345678901",
+        "Role": "doctor",
+        "IsActive": true,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    },
+    {
+        "Id": "4c64fc3a-8fb2-44b9-9b4e-19b7ed2a671e",
+        "FullName": "Dr. Sarah Hassan",
+        "Phone": "012345678902",
+        "Role": "doctor",
+        "IsActive": true,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    },
+    {
+        "Id": "008bc321-fccb-47f6-9a24-60a762737a34",
+        "FullName": "Mohamed Ibrahim",
+        "Phone": "012345678903",
+        "Role": "patient",
+        "IsActive": true,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    },
+    {
+        "Id": "2523c115-3588-440e-9032-8571b93f672c",
+        "FullName": "Nour El-Din",
+        "Phone": "012345678904",
+        "Role": "patient",
+        "IsActive": true,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    },
+    {
+        "Id": "49840dd5-dee7-4aae-8b31-face67da6dab",
+        "FullName": "Admin User",
+        "Phone": "012345678999",
+        "Role": "admin",
+        "IsActive": true,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]

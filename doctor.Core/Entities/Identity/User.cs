@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace doctor.Core.Entities.Identity
 {
-    public class User : IdentityUser
+    public class User : IdentityUser<Guid>
     {
         #region Properties
         public string? FullName { get; set; }
@@ -26,6 +26,9 @@ namespace doctor.Core.Entities.Identity
         #endregion
         #region Relation With Notification
         public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+        #endregion
+        #region Relation With AuditLog
+        public ICollection<AuditLog> AuditLogs { get; set; } = new List<AuditLog>();
         #endregion
 
     }

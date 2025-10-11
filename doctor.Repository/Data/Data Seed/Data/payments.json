@@ -1,0 +1,12 @@
+[
+    {
+        "Id": "7608511f-5373-455e-bbe0-d170eddd38d7",
+        "AppointmentId": "a7c1fe68-e40a-4acb-8b0a-4208bd0a2ae4",
+        "PatientId": "e4b908e6-9cbe-47c1-9999-10a554848d43",
+        "Amount": 500,
+        "Currency": "USD",
+        "Method": "credit_card",
+        "Status": "success",
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]

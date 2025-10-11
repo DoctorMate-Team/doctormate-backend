@@ -1,0 +1,12 @@
+[
+    {
+        "Id": "0105135f-0dad-4c1c-b9a7-5c9c6f256954",
+        "MedicalRecordId": "41e63b4d-994a-423e-910e-92a885ac3aac",
+        "AppointmentId": "a7c1fe68-e40a-4acb-8b0a-4208bd0a2ae4",
+        "DiagnosedBy": "5fcf8c92-bc1b-4048-8128-73af384759bf",
+        "DiagnosisText": "Mild hypertension",
+        "IcdCode": "I10",
+        "Severity": "mild",
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]
