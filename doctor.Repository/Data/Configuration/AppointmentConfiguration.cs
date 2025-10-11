@@ -27,7 +27,7 @@ namespace doctor.Repository.Data.Configuration
             #region Relationship with Patient
             // Many-to-One relationship between Appointment and Patient
             builder.HasOne(a => a.Patient)
-                   .WithMany()
+                   .WithMany(p => p.Appointments)
                    .HasForeignKey(a => a.PatientId)
                    .OnDelete(DeleteBehavior.Cascade);
             #endregion
@@ -35,7 +35,7 @@ namespace doctor.Repository.Data.Configuration
             #region Relationship with Doctor
             // Many-to-One relationship between Appointment and Doctor
             builder.HasOne(a => a.Doctor)
-                   .WithMany()
+                   .WithMany(d => d.Appointments)
                    .HasForeignKey(a => a.DoctorId)
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);

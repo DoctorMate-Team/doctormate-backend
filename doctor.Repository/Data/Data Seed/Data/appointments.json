@@ -1,0 +1,42 @@
+[
+    {
+        "Id": "a7c1fe68-e40a-4acb-8b0a-4208bd0a2ae4",
+        "PatientId": "e4b908e6-9cbe-47c1-9999-10a554848d43",
+        "DoctorId": "6dba88c8-e60a-4a6a-9160-b085ef63cdb0",
+        "ScheduledStart": "2025-10-11T20:22:10.524620",
+        "ScheduledEnd": "2025-10-11T21:22:10.524620",
+        "Status": "completed",
+        "AppointmentType": "in_person",
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    },
+    {
+        "Id": "5d6a2438-dfde-4f08-a766-d702e4ad6eb6",
+        "PatientId": "e4b908e6-9cbe-47c1-9999-10a554848d43",
+        "DoctorId": "6dba88c8-e60a-4a6a-9160-b085ef63cdb0",
+        "ScheduledStart": "2025-10-12T20:22:10.524620",
+        "ScheduledEnd": "2025-10-12T21:22:10.524620",
+        "Status": "completed",
+        "AppointmentType": "in_person",
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    },
+    {
+        "Id": "14b98d9e-3603-400d-b3dd-b26c3f202ffd",
+        "PatientId": "90aaee42-2275-48ee-b3d5-810b8ddca68b",
+        "DoctorId": "9081ef45-a2f3-4818-a69f-2139564a22e2",
+        "ScheduledStart": "2025-10-13T20:22:10.524620",
+        "ScheduledEnd": "2025-10-13T21:22:10.524620",
+        "Status": "pending",
+        "AppointmentType": "in_person",
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    },
+    {
+        "Id": "f3e0611e-b999-4bed-8afa-f76ee6bc1bfb",
+        "PatientId": "90aaee42-2275-48ee-b3d5-810b8ddca68b",
+        "DoctorId": "6dba88c8-e60a-4a6a-9160-b085ef63cdb0",
+        "ScheduledStart": "2025-10-14T20:22:10.524620",
+        "ScheduledEnd": "2025-10-14T21:22:10.524620",
+        "Status": "confirmed",
+        "AppointmentType": "in_person",
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]

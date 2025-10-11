@@ -16,8 +16,8 @@ namespace doctor.Repository.Data.Configuration
 
             #region Relationships
             // Relation with User
-            builder.HasOne<User>()
-                   .WithMany()
+            builder.HasOne(al => al.User)
+                   .WithMany(u => u.AuditLogs)
                    .HasForeignKey(al => al.UserId)
                    .OnDelete(DeleteBehavior.Restrict);
             #endregion

@@ -1,0 +1,13 @@
+[
+    {
+        "Id": "07be5ea2-4517-48d4-856f-a18655eb5898",
+        "DiagnosisId": "0105135f-0dad-4c1c-b9a7-5c9c6f256954",
+        "PatientId": "90aaee42-2275-48ee-b3d5-810b8ddca68b",
+        "DoctorId": "9081ef45-a2f3-4818-a69f-2139564a22e2",
+        "DrugName": "Lisinopril",
+        "Dosage": "10mg",
+        "Instructions": "Take once daily",
+        "DurationDays": 30,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]

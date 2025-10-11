@@ -1,0 +1,11 @@
+[
+    {
+        "Id": "41e63b4d-994a-423e-910e-92a885ac3aac",
+        "PatientId": "90aaee42-2275-48ee-b3d5-810b8ddca68b",
+        "Title": "Annual Checkup",
+        "Description": "Routine examination and tests.",
+        "RecordType": "diagnosis",
+        "Status": "active",
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]
