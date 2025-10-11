@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace doctor.Core.Entities
+namespace doctor.Core.Entities.Identity
 {
-    public class User : BaseEntity<Guid>
+    public class User : IdentityUser
     {
         #region Properties
-        public string Email { get; set; } = null!;
-        public string PasswordHash { get; set; } = null!;
         public string? FullName { get; set; }
         public string? Phone { get; set; }
         public string Role { get; set; } = null!; // patient | doctor | admin
