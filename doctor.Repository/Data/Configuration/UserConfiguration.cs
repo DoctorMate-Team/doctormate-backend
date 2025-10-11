@@ -1,4 +1,4 @@
-using doctor.Core.Entities;
+using doctor.Core.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

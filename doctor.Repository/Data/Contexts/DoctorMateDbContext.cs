@@ -1,4 +1,5 @@
 ﻿using doctor.Core.Entities;
+using doctor.Core.Entities.Identity;
 using doctor.Repository.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System;
