@@ -1,0 +1,47 @@
+# Visual Studio / Rider
+.vs/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+
+# NuGet
+*.nupkg
+# Rider
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# JetBrains
+*.iml
+
+# Local user-specific
+*.local
+
+# Logs
+logs/
+*.log
+
+# Publish
+publish/
+
+# Temp
+.tmp/
+
+# Database files
+*.mdf
+*.ldf
+
+# Editor
+.vscode/
+
+# Entity Framework
+Migrations
+
+# Ignore Data Seed output (if any)
+seeding_out.log
+seeding_err.log

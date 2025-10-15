@@ -1,0 +1,20 @@
+[
+    {
+        "Id": "9081ef45-a2f3-4818-a69f-2139564a22e2",
+        "UserId": "5fcf8c92-bc1b-4048-8128-73af384759bf",
+        "Specialty": "Cardiology",
+        "Qualifications": "MD, PhD",
+        "LicenseNumber": "DOC12345",
+        "ConsultationFee": 500.0,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    },
+    {
+        "Id": "6dba88c8-e60a-4a6a-9160-b085ef63cdb0",
+        "UserId": "4c64fc3a-8fb2-44b9-9b4e-19b7ed2a671e",
+        "Specialty": "Dermatology",
+        "Qualifications": "MD",
+        "LicenseNumber": "DOC67890",
+        "ConsultationFee": 400.0,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]

@@ -1,0 +1,11 @@
+[
+    {
+        "Id": "7f5a8e2a-b3e3-4637-9d8c-884a68dd5ba2",
+        "UserId": "49840dd5-dee7-4aae-8b31-face67da6dab",
+        "Action": "CREATE_USER",
+        "Entity": "User",
+        "EntityId": "5fcf8c92-bc1b-4048-8128-73af384759bf",
+        "Status": "success",
+        "LogTime": "2025-10-11T20:22:10.524620"
+    }
+]

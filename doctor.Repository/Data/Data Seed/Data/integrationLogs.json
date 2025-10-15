@@ -1,0 +1,12 @@
+[
+    {
+        "Id": "c4fdd40b-82d4-45e4-b3ec-ddb887f3ab9c",
+        "Endpoint": "/api/v1/patients",
+        "Method": "POST",
+        "EntityType": "Patient",
+        "EntityId": "90aaee42-2275-48ee-b3d5-810b8ddca68b",
+        "StatusCode": 200,
+        "Success": true,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]

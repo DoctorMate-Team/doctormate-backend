@@ -1,0 +1,10 @@
+[
+    {
+        "Id": "974f377f-1982-4ae6-a269-c4be0c934c39",
+        "UserId": "008bc321-fccb-47f6-9a24-60a762737a34",
+        "Message": "Your appointment has been confirmed.",
+        "Type": "booking",
+        "IsRead": false,
+        "CreatedAt": "2025-10-11T20:22:10.524620"
+    }
+]
