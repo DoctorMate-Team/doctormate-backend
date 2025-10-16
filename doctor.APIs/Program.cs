@@ -68,7 +68,7 @@ namespace doctor.APIs
                     c.RoutePrefix = string.Empty;
                 });
             }
-
+            //test
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
