@@ -1,6 +1,97 @@
+﻿//using doctor.Repository.Data.Contexts;
+//using doctor.Service;
+//using Microsoft.EntityFrameworkCore;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
+//using Microsoft.IdentityModel.Tokens;
+//using System.Text;
 
+//namespace doctor.APIs
+//{
+//    public class Program
+//    {
+//        public static async Task Main(string[] args)
+//        {
+//            var builder = WebApplication.CreateBuilder(args);
+
+//            builder.Services.AddDbContext<DoctorMateDbContext>(options =>
+//                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//            builder.Services.AddControllers();
+//            builder.Services.AddEndpointsApiExplorer();
+//            builder.Services.AddSwaggerGen();
+
+//            var jwtSettings = builder.Configuration.GetSection("Jwt");
+//            var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+//            builder.Services.AddSingleton(new JwtService(jwtSettings["Key"]));
+
+//            builder.Services.AddAuthentication(options =>
+//            {
+//                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//            })
+//            .AddJwtBearer(options =>
+//            {
+//                options.RequireHttpsMetadata = false;
+//                options.SaveToken = true;
+//                options.TokenValidationParameters = new TokenValidationParameters
+//                {
+//                    ValidateIssuer = true,
+//                    ValidateAudience = true,
+//                    ValidateLifetime = true,
+//                    ValidateIssuerSigningKey = true,
+//                    ValidIssuer = jwtSettings["Issuer"],
+//                    ValidAudience = jwtSettings["Audience"],
+//                    IssuerSigningKey = new SymmetricSecurityKey(key)
+//                };
+//            });
+
+//            var app = builder.Build();
+
+//            await ApplyDatabaseMigrations(app);
+
+//            if (app.Environment.IsDevelopment())
+//            {
+//                app.UseSwagger();
+//                app.UseSwaggerUI();
+//            }
+
+//            app.UseHttpsRedirection();
+//            app.UseAuthentication();
+//            app.UseAuthorization();
+
+//            app.MapControllers();
+
+//            app.Run();
+//        }
+
+//        private static async Task ApplyDatabaseMigrations(WebApplication app)
+//        {
+//            using var scope = app.Services.CreateScope();
+//            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+//            try
+//            {
+//                var context = scope.ServiceProvider.GetRequiredService<DoctorMateDbContext>();
+
+//                var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+//                if (pendingMigrations.Any())
+//                {
+//                    await context.Database.MigrateAsync();
+//                }
+//            }
+//            catch (Exception ex)
+//            {
+//                logger.LogError(ex, "Error applying database migrations: {ErrorMessage}", ex.Message);
+//            }
+//        }
+//    }
+//}
 using doctor.Repository.Data.Contexts;
+using doctor.Service;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace doctor.APIs
 {
@@ -10,83 +101,85 @@ namespace doctor.APIs
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            #region Connect DataBase
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenAnyIP(7200);
+                options.ListenAnyIP(7243, listenOptions =>
+                {
+                    listenOptions.UseHttps();
+                });
+            });
 
             builder.Services.AddDbContext<DoctorMateDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-            #endregion
+
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            var jwtSettings = builder.Configuration.GetSection("Jwt");
+            var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+            builder.Services.AddSingleton(new JwtService(jwtSettings["Key"]));
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = true;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSettings["Issuer"],
+                    ValidAudience = jwtSettings["Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                };
+            });
+
             var app = builder.Build();
 
-            #region Auto Database Migration
-            // تطبيق الـ migrations تلقائياً عند تشغيل الـ application
             await ApplyDatabaseMigrations(app);
-            #endregion
 
-            #region Kestral Pipliens
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doctor API v1");
+                    c.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
-
             app.MapControllers();
-            #endregion
             app.Run();
         }
 
-        /// <summary>
-        /// تطبيق الـ Database Migrations تلقائياً
-        /// </summary>
         private static async Task ApplyDatabaseMigrations(WebApplication app)
         {
             using var scope = app.Services.CreateScope();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
             try
             {
                 var context = scope.ServiceProvider.GetRequiredService<DoctorMateDbContext>();
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-
-                logger.LogInformation("🔄 Checking for pending database migrations...");
-
-                // تحقق من وجود migrations معلقة
                 var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
-                
                 if (pendingMigrations.Any())
                 {
-                    logger.LogInformation($"📊 Found {pendingMigrations.Count()} pending migrations. Applying...");
-                    
-                    // تطبيق الـ migrations
                     await context.Database.MigrateAsync();
-                    
-                    logger.LogInformation("✅ Database migrations applied successfully!");
-                }
-                else
-                {
-                    logger.LogInformation("✅ Database is up to date. No pending migrations.");
                 }
             }
             catch (Exception ex)
             {
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-                logger.LogError(ex, "❌ Error applying database migrations: {ErrorMessage}", ex.Message);
-                
-                // في حالة الخطأ، يمكنك اختيار إما:
-                // 1. إيقاف الـ application (uncomment التالي)
-                // throw;
-                
-                // 2. أو الاستمرار مع تحذير (الحالي)
-                logger.LogWarning("⚠️ Application will continue without applying migrations.");
+                logger.LogError(ex, "Error applying database migrations: {ErrorMessage}", ex.Message);
             }
         }
     }
