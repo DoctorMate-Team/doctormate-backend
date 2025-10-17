@@ -1,4 +1,5 @@
-﻿using BCrypt.Net;
+﻿
+using BCrypt.Net;
 using doctor.Core.Entities;
 using doctor.Core.Entities.Identity;
 using doctor.Repository.Data.Contexts;
@@ -77,6 +78,84 @@ namespace doctor.APIs.Controllers
                     user.Email,
                     user.Role
                 }));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, "An unexpected error occurred.", ex.Message));
+            }
+        }
+
+        [HttpPut("completeprofile/{id:guid}")]
+        public IActionResult CompleteProfile(Guid id, [FromBody] object profileData)
+        {
+            try
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == id);
+                if (user == null)
+                {
+                    return NotFound(new ApiResponse(false, "User not found."));
+                }
+
+                if (user.Role == "Doctor")
+                {
+                    var doctor = _context.Doctors.FirstOrDefault(d => d.UserId == id);
+                    if (doctor == null)
+                    {
+                        return NotFound(new ApiResponse(false, "Doctor not found."));
+                    }
+
+                   
+
+                    _context.SaveChanges();
+                    return Ok(new ApiResponse(true, "Doctor profile completed successfully."));
+                }
+                else if (user.Role == "Patient")
+                {
+                    var patient = _context.Patients.FirstOrDefault(p => p.UserId == id);
+                    if (patient == null)
+                    {
+                        return NotFound(new ApiResponse(false, "Patient not found."));
+                    }
+
+                    
+
+                    _context.SaveChanges();
+                    return Ok(new ApiResponse(true, "Patient profile completed successfully."));
+                }
+
+                return BadRequest(new ApiResponse(false, "Invalid user role."));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, "An unexpected error occurred.", ex.Message));
+            }
+        }
+
+        [HttpPost("resetpassword")]
+        public IActionResult ResetPassword([FromBody] ResetPasswordDto model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.NewPassword))
+                {
+                    return BadRequest(new ApiResponse(false, "Email and new password are required."));
+                }
+
+                if (!IsValidEmail(model.Email))
+                {
+                    return BadRequest(new ApiResponse(false, "Invalid email format."));
+                }
+
+                var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+                if (user == null)
+                {
+                    return NotFound(new ApiResponse(false, "User not found."));
+                }
+
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
+                _context.SaveChanges();
+
+                return Ok(new ApiResponse(true, "Password reset successfully."));
             }
             catch (Exception ex)
             {
