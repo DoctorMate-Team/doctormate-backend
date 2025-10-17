@@ -38,7 +38,6 @@ namespace doctor.Repository.Data.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
-            // تطبيق جميع الـ Configurations الموجودة في نفس الـ Assembly
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DoctorMateDbContext).Assembly);
         }
         #endregion
