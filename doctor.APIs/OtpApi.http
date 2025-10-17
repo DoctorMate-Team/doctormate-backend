@@ -1,0 +1,54 @@
+### OTP API Testing
+
+@baseUrl = http://localhost:5000
+@userId = test-user-123
+@email = test@example.com
+
+### 1. Send OTP
+POST {{baseUrl}}/api/otp/send
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "email": "{{email}}"
+}
+
+### 2. Verify OTP (Replace XXXXXX with actual OTP from email)
+POST {{baseUrl}}/api/otp/verify
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "otpCode": "XXXXXX"
+}
+
+### 3. Cleanup Expired OTPs (Admin)
+POST {{baseUrl}}/api/otp/cleanup
+Content-Type: application/json
+
+### Test with Invalid Email
+POST {{baseUrl}}/api/otp/send
+Content-Type: application/json
+
+{
+  "userId": "test-user-456",
+  "email": "invalid-email"
+}
+
+### Test with Empty UserId
+POST {{baseUrl}}/api/otp/send
+Content-Type: application/json
+
+{
+  "userId": "",
+  "email": "test@example.com"
+}
+
+### Test Verify with Invalid OTP
+POST {{baseUrl}}/api/otp/verify
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "otpCode": "000000"
+}

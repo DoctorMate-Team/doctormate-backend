@@ -1,6 +1,8 @@
 ﻿
 using doctor.Repository.Data.Contexts;
 using doctor.Service;
+using doctor.Core.Services.contract;
+using doctor.Service.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -23,8 +25,30 @@ namespace doctor.APIs
                 });
             });
 
+            // Configure Main Database
             builder.Services.AddDbContext<DoctorMateDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Configure OTP Database
+            builder.Services.AddDbContext<OtpDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("OtpConnection")));
+
+            // Register Email Service
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            
+            // Register OTP Service
+            builder.Services.AddScoped<IOtpService, OtpService>();
+
+            // Add CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -68,6 +92,10 @@ namespace doctor.APIs
                     c.RoutePrefix = string.Empty;
                 });
             }
+            
+            // Add CORS middleware
+            app.UseCors();
+            
             //test
             app.UseHttpsRedirection();
             app.UseAuthentication();
