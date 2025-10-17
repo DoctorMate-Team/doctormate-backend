@@ -1,11 +1,14 @@
-﻿using doctor.Core.Entities.Identity;
+﻿using BCrypt.Net;
+using doctor.APIs.Models;
+using doctor.Core.Entities.Identity;
 using doctor.Repository.Data.Contexts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using BCrypt.Net;
+using System.Text.RegularExpressions;
 
 namespace doctor.APIs.Controllers
 {
@@ -23,35 +26,51 @@ namespace doctor.APIs.Controllers
         }
 
         [HttpPost]
+        [EnableRateLimiting("LoginPolicy")]
         public IActionResult Login([FromBody] LoginDto model)
         {
-            if (string.IsNullOrEmpty(model.EmailOrPhone) || string.IsNullOrEmpty(model.Password))
-                return BadRequest("Email/Phone and Password are required.");
-
-            var user = _context.Users.FirstOrDefault(u =>
-                u.Email == model.EmailOrPhone || u.PhoneNumber == model.EmailOrPhone);
-
-            if (user == null)
-                return Unauthorized("User NotFound");
-
-            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash);
-            if (!isPasswordValid)
-                return Unauthorized("Password Uncorrect");
-
-            var token = GenerateJwtToken(user);
-
-            return Ok(new
+            try
             {
-                Message = "Login successful",
-                Token = token,
-                User = new
+                if (string.IsNullOrEmpty(model.EmailOrPhone) || string.IsNullOrEmpty(model.Password))
+                    return BadRequest(new ApiResponse(false, "Email/Phone and Password are required."));
+
+                bool isEmail = IsValidEmail(model.EmailOrPhone);
+
+                var user = _context.Users.FirstOrDefault(u =>
+                    (isEmail && u.Email == model.EmailOrPhone) || (!isEmail && u.PhoneNumber == model.EmailOrPhone));
+
+                if (user == null)
+                    return Unauthorized(new ApiResponse(false, "User not found."));
+
+                bool isPasswordValid = BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash);
+                if (!isPasswordValid)
+                    return Unauthorized(new ApiResponse(false, "Password incorrect."));
+
+                var token = GenerateJwtToken(user);
+
+                return Ok(new ApiResponse(true, "Login successful", new
                 {
-                    user.Id,
-                    user.FullName,
-                    user.Email,
-                    user.Role
-                }
-            });
+                    Token = token,
+                    User = new
+                    {
+                        user.Id,
+                        user.FullName,
+                        user.Email,
+                        user.Role
+                    }
+                }));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(false, "An unexpected error occurred.", ex.Message));
+            }
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email)) return false;
+            var pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
         }
 
         private string GenerateJwtToken(User user)
@@ -71,7 +90,7 @@ namespace doctor.APIs.Controllers
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddDays(7),
+                expires: DateTime.UtcNow.AddDays(1),
                 signingCredentials: creds
             );
 
