@@ -1,0 +1,17 @@
+### Test OTP Send
+POST http://localhost:7200/api/Otp/send
+Content-Type: application/json
+
+{
+  "userId": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "email": "doctormate89@gmail.com"
+}
+
+### Test OTP Verify (Replace 123456 with actual OTP from email)
+POST http://localhost:7200/api/Otp/verify
+Content-Type: application/json
+
+{
+  "userId": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "otpCode": "123456"
+}
